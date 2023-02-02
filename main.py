@@ -1,3 +1,5 @@
+import sys
+
 from dataclasses import dataclass
 from enum import Enum, auto
 from typing import Iterator
@@ -116,9 +118,17 @@ def compute_molecular_mass(elems: list[tuple[int, str]]) -> int:
         elems
     ))
 
+def get_verbose_output(elems: list[tuple[int, str]]) -> str:
+    return " + ".join([f"{elem[0]} * {get_atom_mass(elem[1])}" for elem in elems]) +\
+        f" = {compute_molecular_mass(elems)}"
+
+def get_output(elems: list[tuple[int, str]]) -> int | str:
+    return (get_verbose_output(elems) if "-v" in sys.argv
+        else compute_molecular_mass(elems))
+
 def main():
     while True:
-        print(compute_molecular_mass(parse(iter(lex(input())))))
+        print(get_output(parse(iter(lex(input())))))
 
 if __name__ == "__main__":
     main()
