@@ -26,7 +26,7 @@ def get_generic_tok_type(tok: str) -> TokenKind:
 def lex(string: str) -> list[Token]:
     tokens = []
     tok = ""
-    for char in string:
+    for index, char in enumerate(string):
         if char == "(":
             if tok:
                 tokens.append(Token(get_generic_tok_type(tok), tok))
@@ -37,7 +37,7 @@ def lex(string: str) -> list[Token]:
                 tokens.append(Token(get_generic_tok_type(tok), tok))
             tokens.append(Token(TokenKind.R_BRACK, ")"))
             tok = ""
-        elif char.isupper() or char.isnumeric():
+        elif char.isupper() or (char.isnumeric() and not string[index-1].isnumeric() and index > 0):
             if tok:
                 tokens.append(Token(get_generic_tok_type(tok), tok))
             tok = char
@@ -50,7 +50,6 @@ def lex(string: str) -> list[Token]:
     
     if tok:
         tokens.append(Token(get_generic_tok_type(tok), tok))
-
     return tokens
 
 def add_elem(elems: list[tuple[int, str]], elem: tuple[int, str]):
