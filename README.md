@@ -2,7 +2,7 @@
 
 Compute the molecular mass of your favorite compound whether or not it can or will exist.
 
-Requires: 🐍 3
+Requires: Python 3
 
 Setup:
 ```shell
@@ -19,11 +19,15 @@ H2O
 Ca(OH)2
 97
 ^C
+$ python3 main.py -v
+CO2
+1 * 12 + 2 * 16 = 44
+^C
 ```
 
 Exit using Ctrl + C
 
-Consider using [rlwrap](https://github.com/hanslub42/rlwrap) for line history available on both apt (ubuntu/debian) and dnf (fedora). i.e. use arrow keys for history.
+You can use verbose mode using `-v` flag to display the underlying calculations. Consider using [rlwrap](https://github.com/hanslub42/rlwrap) for line history available on both apt (ubuntu/debian) and dnf (fedora). i.e. use arrow keys for history.
 
 ```shell
 rlwrap python3 main.py
